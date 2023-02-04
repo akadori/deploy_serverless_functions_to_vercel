@@ -10,6 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
     "@vercel/node": "^2.9.0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0",
+    "node-fetch": "^3.3.0",
+    "octokit": "^2.0.14"
   }
 }
