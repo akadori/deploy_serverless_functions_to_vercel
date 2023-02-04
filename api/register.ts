@@ -5,5 +5,6 @@ export default function (req: VercelRequest, res: VercelResponse) {
     eventStore.addEvent({
         createdAt: new Date(),
         payload: req.body
-    }); 
+    });
+    res.status(200).send("OK");
 }
