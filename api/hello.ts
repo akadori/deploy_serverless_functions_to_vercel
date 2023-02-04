@@ -8,5 +8,5 @@ export default function (req: NowRequest, res: NowResponse) {
   console.log("typeof req.body", typeof req.body)
   console.log(`typeof req.body === "object" ?? Object.keys(req.body)`, typeof req.body === "object" && Object.keys(req.body))
   const { name = "World" } = req.query;
-  res.send(`Hello ${name}! ${++count}`);
+  res.send(`Hello Hello ${name}! ${++count}`);
 }
