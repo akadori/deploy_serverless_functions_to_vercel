@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import * as jwt from 'jsonwebtoken';
-import fetch from 'node-fetch';
+import fetch from 'node-fetch-commonjs';
 import { Octokit } from 'octokit';
 
 export default async function (req: VercelRequest, res: VercelResponse) {
