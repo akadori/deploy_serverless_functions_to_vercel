@@ -27,21 +27,28 @@ export default async function (req: VercelRequest, res: VercelResponse) {
 
     const encoded = jwt.sign(payload, PRIVATE_KEY, { algorithm: 'RS256' });
     const url = "https://api.github.com/app"
-    const token = await fetch(url, {
-        headers: {
-            Authorization: `Bearer ${encoded}`,
-            Accept: "application/vnd.ghub.v3+json",
-        }
-    }).then(res => res.json()).then(res => (res as unknown as { token: string}).token);
+    try {
+        const token = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${encoded}`,
+                Accept: "application/vnd.ghub.v3+json",
+            }
+        }).then(res => res.json()).then(res => (res as unknown as { token: string}).token);
+        // eslint-disable-next-line no-console
+        console.log(`token: ${JSON.stringify(token)}`);
 
-    const octokit = new Octokit({
-        auth: token,
-    });
-    await octokit.request('POST /repos/{owner}/{repo}/issues', {
-        owner: 'akadori',
-        repo: "deploy_serverless_functions_to_vercel",
-        title: "test",
-        body: "test",
-    });
-    res.status(200).send("OK");
+        const octokit = new Octokit({
+            auth: token,
+        });
+        await octokit.request('POST /repos/{owner}/{repo}/issues', {
+            owner: 'akadori',
+            repo: "deploy_serverless_functions_to_vercel",
+            title: "test",
+            body: "test",
+        });
+        res.status(200).send("OK");
+    }catch(e) {
+        console.error(e);
+        res.status(500).send("NG");
+    }
 }
